@@ -41,7 +41,7 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200 h-[330px]">
+    <div className="flex flex-col gap-3 p-4 bg-gray-50 rounded-2xl border border-gray-200 h-[330px]">
       <div className="border-b pb-[12px] flex items-center justify-between">
         <div className="flex items-center gap-2">
           <MessageCircle className="w-5 h-5 text-teal-500" />

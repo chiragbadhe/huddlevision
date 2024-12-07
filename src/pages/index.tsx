@@ -62,7 +62,6 @@ export default function Home() {
     if (!createdRoomId) return;
     const link = `${origin}/${createdRoomId}`;
     navigator.clipboard.writeText(link);
-    alert("Room link copied to clipboard!");
   };
 
   return (

@@ -43,6 +43,7 @@ const useTranscription = ({
     const recognition = new SpeechRecognition();
     recognition.lang = language;
     recognition.continuous = continuous;
+    recognition.interimResults = false;
 
     recognition.onstart = () => {
       setIsListening(true);
@@ -50,10 +51,9 @@ const useTranscription = ({
     };
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
-      const currentTranscription = Array.from(event.results)
-        .map((result) => result[0].transcript)
-        .join(" ");
-      setTranscription(currentTranscription);
+      const result = event.results[event.results.length - 1];
+      const transcript = result[0].transcript;
+      setTranscription(transcript);
     };
 
     recognition.onerror = (event) => {

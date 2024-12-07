@@ -1,42 +1,127 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# HuddleVision
 
-## Getting Started
+HuddleVision is a next-generation video meeting application built using the robust [Huddle01 SDKs](https://www.huddle01.com/). Designed to enhance virtual collaboration, HuddleVision comes packed with features like real-time transcriptions, smart summaries, AI-driven translations, and more.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Seamless Room Management**  
+  Effortlessly create and join meeting rooms for instant collaboration.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- **Real-Time Transcriptions**  
+  Powered by Whisper AI, HuddleVision provides accurate live transcription of conversations.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- **Smart Summaries**  
+  Generate concise summaries of topics discussed during the meeting using OpenAI.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- **Curated Feeds**  
+  Access reference links and curated feeds related to the discussed topics in the feed section.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **AI-Powered Translations**  
+  Break language barriers with real-time translations powered by advanced AI.
 
-## Learn More
+- **Intelligent Chatbot**  
+  Leverage the built-in chatbot powered by GPT for instant assistance and smooth communication.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Frontend**: React, Next.js, Tailwind CSS
+- **Backend**: Node.js, Express
+- **AI Features**: Whisper AI, OpenAI GPT APIs
+- **Video SDK**: Huddle01 SDK
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔧 Setup and Installation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# huddlevision
-# huddlevision
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/yourusername/huddlevision.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd huddlevision
+   ```
+
+3. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Create a `.env` file in the root directory and configure the following environment variables:
+
+   ```env
+    NEXT_PUBLIC_OPENAI_API_KEY=your_openai_api_key
+    NEXT_PUBLIC_API_KEY=your_api_key
+    NEXT_PUBLIC_PROJECT_ID=your_project_id
+   ```
+
+5. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+6. Open the app in your browser:
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## 🖥️ How to Use
+
+1. **Creating/Joining a Room**:  
+   Navigate to the "Rooms" section to create a new room or join an existing one using the room code.
+
+2. **Real-Time Transcriptions**:  
+   Enable transcriptions during the meeting to see live captions.
+
+3. **Summaries and Feeds**:  
+   After the meeting, view a summary of the discussion and access related reference links in the "Feed" section.
+
+4. **Translations**:  
+   Use the translation feature for real-time language support during meetings.
+
+5. **Chatbot Assistance**:  
+   Interact with the chatbot for instant help and meeting-related queries.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add feature-name"
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature-name
+   ```
+5. Create a pull request.
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 📧 Contact
+
+For questions or support, reach out to us at [0xchirag@gmail.com](mailto:0xchirag@gmail.com).

@@ -91,7 +91,7 @@ const ChatBot: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200 h-[330px]">
+    <div className="flex flex-col gap-3 p-4 bg-gray-100 rounded-lg border border-gray-200 h-[330px]">
       <div className="border-b pb-[12px] flex items-center justify-between">
         <div className="flex items-center gap-2">
           <MessageCircle className="w-5 h-5 text-teal-500" />
@@ -100,7 +100,7 @@ const ChatBot: React.FC = () => {
         <div className="text-xs text-gray-500">{messages.length} messages</div>
       </div>
 
-      <div className="flex-1 space-y-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 bg-white scrollbar-track-transparent p-4 rounded-lg">
+      <div className="flex-1 space-y-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 bg-white border scrollbar-track-transparent p-4 rounded-lg">
         {messages.length > 0 ? (
           messages.map((message, index) => (
             <div

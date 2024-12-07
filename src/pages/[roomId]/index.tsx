@@ -197,8 +197,6 @@ function Home({ token }: Props) {
         )
       ) : (
         <div className="aspect-video bg-gray-100 backdrop-blur-lg rounded-xl overflow-hidden border border-teal-500 flex flex-col items-center justify-center gap-4 p-6">
-          <Users className="w-12 h-12 text-teal-400 animate-pulse" />
-
           <div className="flex items-center gap-2 mt-2">
             <div className="w-2 h-2 bg-teal-500 rounded-full animate-bounce" />
             <div className="w-2 h-2 bg-teal-500 rounded-full animate-bounce delay-100" />
