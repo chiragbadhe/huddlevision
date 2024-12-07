@@ -1,31 +1,75 @@
 import React, { useState } from "react";
 import { MessageCircle } from "lucide-react";
 import ChatInput from "../NormalChat/ChatInput";
+import OpenAI from "openai";
+import Typewriter from "typewriter-effect";
 
 type Message = {
   text: string;
   isBot: boolean;
+  sentTimestamp: string;
+  receivedTimestamp?: string;
 };
 
 const ChatBot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [text, setText] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const openai = new OpenAI({
+    apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+    dangerouslyAllowBrowser: true,
+  });
 
   const sendMessage = async () => {
     if (!text.trim()) return;
+
+    const sentTimestamp = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
     // Add user message
-    const userMessage = { text, isBot: false };
-    setMessages(prev => [...prev, userMessage]);
+    const userMessage = { text, isBot: false, sentTimestamp };
+    setMessages((prev) => [...prev, userMessage]);
     setText("");
-    // Simulate bot response
-    // TODO: Replace with actual AI integration
-    setTimeout(() => {
+    setIsLoading(true);
+
+    try {
+      const completion = await openai.chat.completions.create({
+        messages: [{ role: "user", content: text }],
+        model: "gpt-3.5-turbo",
+      });
+
+      const botResponse =
+        completion.choices[0]?.message?.content ||
+        "Sorry, I couldn't process that.";
+
+      const receivedTimestamp = new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
       const botMessage = {
-        text: "This is a simulated bot response. AI integration coming soon!",
-        isBot: true
+        text: botResponse,
+        isBot: true,
+        sentTimestamp: receivedTimestamp,
+        receivedTimestamp,
       };
-      setMessages(prev => [...prev, botMessage]);
-    }, 1000);
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      const errorMessage = {
+        text: "Sorry, there was an error processing your request.",
+        isBot: true,
+        sentTimestamp: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -35,9 +79,7 @@ const ChatBot: React.FC = () => {
           <MessageCircle className="w-5 h-5 text-teal-500" />
           <span className="font-medium text-gray-900">AI Chat</span>
         </div>
-        <div className="text-xs text-gray-500">
-          {messages.length} messages
-        </div>
+        <div className="text-xs text-gray-500">{messages.length} messages</div>
       </div>
 
       <div className="flex-1 space-y-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 bg-white scrollbar-track-transparent p-4 rounded-lg">
@@ -45,8 +87,19 @@ const ChatBot: React.FC = () => {
           messages.map((message, index) => (
             <div
               key={index}
-              className={`flex ${message.isBot ? "justify-start" : "justify-end"}`}
+              className={`flex flex-col ${
+                message.isBot ? "items-start" : "items-end"
+              }`}
             >
+              <div className="text-xs text-gray-400 mb-1">
+                {message.isBot ? (
+                  <>
+                    <span>Response: {message.receivedTimestamp}</span>
+                  </>
+                ) : (
+                  <span>Sent: {message.sentTimestamp}</span>
+                )}
+              </div>
               <div
                 className={`max-w-[80%] px-4 py-2 rounded-lg ${
                   message.isBot
@@ -54,7 +107,19 @@ const ChatBot: React.FC = () => {
                     : "bg-teal-500 text-white"
                 }`}
               >
-                {message.text}
+                {message.isBot ? (
+                  <Typewriter
+                    options={{
+                      delay: 30,
+                      cursor: "",
+                    }}
+                    onInit={(typewriter) => {
+                      typewriter.typeString(message.text).start();
+                    }}
+                  />
+                ) : (
+                  message.text
+                )}
               </div>
             </div>
           ))
@@ -67,7 +132,12 @@ const ChatBot: React.FC = () => {
         )}
       </div>
 
-      <ChatInput text={text} setText={setText} sendMessage={sendMessage} />
+      <ChatInput
+        text={text}
+        setText={setText}
+        sendMessage={sendMessage}
+        disabled={isLoading}
+      />
     </div>
   );
 };

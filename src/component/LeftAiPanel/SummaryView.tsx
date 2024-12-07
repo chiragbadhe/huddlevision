@@ -1,6 +1,6 @@
 import { FC } from "react";
 import PanelWrapper from "./PanelWrapper";
-import { FileText } from "lucide-react";
+import { FileText, RefreshCw } from "lucide-react";
 
 interface SummaryItem {
   keyPoints: string[];
@@ -28,9 +28,14 @@ const SummaryView: FC<SummaryViewProps> = () => {
 
   return (
     <PanelWrapper>
-      <div className="flex items-center gap-2">
-        <FileText className="w-5 h-5 text-teal-500" />
-        <h3 className="text-lg font-semibold text-gray-900">Meeting Summary</h3>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <FileText className="w-5 h-5 text-teal-500" />
+          <h3 className="text-lg font-semibold text-gray-900">Meeting Summary</h3>
+        </div>
+        <button className="p-2 hover:bg-gray-100 hover:rotate-45 duration-200 transition rounded-lg">
+          <RefreshCw className="w-5 h-5 text-teal-500" />
+        </button>
       </div>
       <div className="min-h-[200px] p-4 bg-white border rounded-lg space-y-4 overflow-scroll h-[200px]">
         <div>

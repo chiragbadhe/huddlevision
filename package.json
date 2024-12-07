@@ -16,10 +16,12 @@
     "cors": "^2.8.5",
     "lucide-react": "^0.468.0",
     "next": "14.0.3",
+    "openai": "^4.76.0",
     "react": "^18",
     "react-dom": "^18",
     "react-sound-visualizer": "^1.1.1",
-    "react-speech-recognition": "^3.10.0"
+    "react-speech-recognition": "^3.10.0",
+    "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

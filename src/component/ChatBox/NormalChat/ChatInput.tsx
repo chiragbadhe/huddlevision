@@ -4,12 +4,16 @@ interface ChatInputProps {
   text: string;
   setText: (text: string) => void;
   sendMessage: () => void;
+  disabled?: boolean;
+  onStop?: () => void;
 }
 
 const ChatInput: React.FC<ChatInputProps> = ({
   text,
   setText,
   sendMessage,
+  disabled,
+  onStop
 }) => {
   return (
     <div className="flex gap-2 pt-2 border-t">
@@ -22,11 +26,12 @@ const ChatInput: React.FC<ChatInputProps> = ({
         onKeyDown={(e) => {
           if (e.key === "Enter") sendMessage();
         }}
+        disabled={disabled}
       />
       <button
         className="p-2.5 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
-        onClick={sendMessage}
-        disabled={!text.trim()}
+        onClick={onStop || sendMessage}
+        disabled={!text.trim() || disabled}
       >
         <Send className="w-5 h-5" />
       </button>
