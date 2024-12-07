@@ -3,6 +3,8 @@ import FeedsView from "./FeedsView";
 import SummaryView from "./SummaryView";
 import TranscriptionView from "./TranscriptionView";
 import AiPanelButton from "./AiPanelButton";
+import { MessageCircle, Send, User } from "lucide-react";
+import ChatBox from "../ChatBox";
 
 interface LeftAiPanelProps {}
 
@@ -11,8 +13,8 @@ const LeftAiPanel = ({}: LeftAiPanelProps) => {
     "transcription" | "summary" | "feeds"
   >("transcription");
 
-  return ( 
-    <div className="w-full space-y-4 mt-[16px]">
+  return (
+    <div className="w-full space-y-4 mt-[16px] flex flex-col">
       <div className="flex gap-1 p-1 bg-gray-200 rounded-lg border">
         <AiPanelButton
           label="Transcription"
@@ -38,6 +40,8 @@ const LeftAiPanel = ({}: LeftAiPanelProps) => {
       ) : (
         <FeedsView />
       )}
+
+      <ChatBox />
     </div>
   );
 };
