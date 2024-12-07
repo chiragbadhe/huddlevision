@@ -21,7 +21,8 @@
     "react-dom": "^18",
     "react-sound-visualizer": "^1.1.1",
     "react-speech-recognition": "^3.10.0",
-    "typewriter-effect": "^2.21.0"
+    "typewriter-effect": "^2.21.0",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

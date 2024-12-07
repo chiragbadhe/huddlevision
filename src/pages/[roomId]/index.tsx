@@ -32,8 +32,6 @@ import LoadingScreen from "@/component/StateScreens/LoadingScreen";
 import RoomTopBar from "@/component/RoomTopBar";
 import TranslatedText from "@/component/AudioTranslator/TranslatedText";
 
-const inter = Inter({ subsets: ["latin"] });
-
 type Props = {
   token: string;
 };
@@ -196,7 +194,10 @@ function Home({ token }: Props) {
               </div>
 
               <div>
-                <TranslatedText />
+                <TranslatedText
+                  peerId={dominantSpeakerId}
+                  transcriptedText={"Chirag badhe is good"}
+                />
               </div>
             </div>
 
