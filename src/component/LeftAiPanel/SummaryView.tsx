@@ -146,10 +146,13 @@ const SummaryView: FC<SummaryViewProps> = () => {
             Key Discussion Points
           </h4>
           <ul className="list-disc pl-5 text-gray-600 text-sm space-y-2">
-            {/* {summaryData} */}
-            {summaryData?.keyPoints?.map((point, index) => (
-              <li key={index}>{point}</li>
-            ))}
+            {summaryData && summaryData.keyPoints && summaryData.keyPoints.length > 0 ? (
+              summaryData.keyPoints.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))
+            ) : (
+              <li>No key points available</li>
+            )}
           </ul>
         </div>
 

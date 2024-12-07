@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useLocalAudio } from "@huddle01/react/hooks";
 import { Visualizer, VisualizerChildrenProps } from "react-sound-visualizer";
 import { AudioLines, Disc2 } from "lucide-react";
@@ -23,13 +23,11 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({}) => {
   return (
     <Visualizer audio={stream}>
       {(props: VisualizerChildrenProps) => {
-        useEffect(() => {
-          if (isAudioOn && props?.start) {
-            props.start();
-          } else if (props?.stop) {
-            props.stop();
-          }
-        }, [isAudioOn, props]);
+        if (isAudioOn && props?.start) {
+          props.start();
+        } else if (props?.stop) {
+          props.stop();
+        }
 
         return (
           <div className="flex items-center justify-between px-[24px] space-x-8 py-3  border-b">
