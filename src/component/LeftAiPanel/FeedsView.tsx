@@ -53,8 +53,10 @@ const FeedsView: FC<FeedsViewProps> = () => {
               {
                 role: "system",
                 content: `You are a research assistant that provides relevant academic citations and resources. 
-                         For each topic in the transcript, provide 2-3 high quality citations in valid JSON format like:
-                         [{"title": "Example Paper", "description": "Description text", "link": "https://example.com", "relevanceScore": 8, "type": "paper"}]`,
+                         Return an array of citations in the following JSON format:
+                         [{"title": "Example Paper", "description": "Description text", "link": "https://example.com", "relevanceScore": 8, "type": "paper"}]
+                         Provide 2-3 high quality citations for each major topic in the transcript.
+                         Ensure the response is valid JSON - do not include any explanatory text.`,
               },
               {
                 role: "user",
