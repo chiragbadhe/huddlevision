@@ -29,7 +29,6 @@ HuddleVision is a next-generation video meeting application built using the robu
 ## 🛠️ Tech Stack
 
 - **Frontend**: React, Next.js, Tailwind CSS
-- **Backend**: Node.js, Express
 - **AI Features**: Whisper AI, OpenAI GPT APIs
 - **Video SDK**: Huddle01 SDK
 
@@ -52,7 +51,7 @@ HuddleVision is a next-generation video meeting application built using the robu
 3. Install the dependencies:
 
    ```bash
-   npm install
+   bun install
    ```
 
 4. Create a `.env` file in the root directory and configure the following environment variables:
@@ -66,7 +65,7 @@ HuddleVision is a next-generation video meeting application built using the robu
 5. Start the development server:
 
    ```bash
-   npm run dev
+   bun run dev
    ```
 
 6. Open the app in your browser:
