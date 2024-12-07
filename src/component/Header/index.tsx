@@ -1,8 +1,8 @@
 import { useRoom } from "@huddle01/react/hooks";
-import { Video, Wallet } from "lucide-react";
+import { Video, Wallet, LogOut } from "lucide-react";
 
 const Header = () => {
-  const { state } = useRoom({});
+  const { state, leaveRoom } = useRoom({});
 
   return (
     <header className="flex justify-between items-center p-4 border-b border-teal-500 bg-gradient-to-r from-white to-gray-100 backdrop-blur-sm">
@@ -19,11 +19,27 @@ const Header = () => {
       </div>
 
       <div className="flex items-center space-x-4">
-        <div>
-          <span className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-sm font-medium border border-teal-200">
-            Status: {state}
-          </span>
-        </div>
+        {state === "connected" ? (
+          <>
+            <div>
+              <span className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-sm font-medium border border-teal-200">
+                Status: {state}
+              </span>
+            </div>
+
+            <button
+              className="px-5 py-2.5 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-medium rounded-lg transition-all duration-400 flex items-center space-x-2.5 shadow-sm hover:shadow-md focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 active:scale-95"
+              onClick={() => {
+                leaveRoom();
+                window.location.href = "/";
+              }}
+              aria-label="Leave Room"
+            >
+              <LogOut className="w-5 h-5" />
+              <span>Leave Room</span>
+            </button>
+          </>
+        ) : null}
 
         <button
           className="px-5 py-2.5 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-medium rounded-lg transition-all duration-400 flex items-center space-x-2.5 shadow-sm hover:shadow-md focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50 active:scale-95"

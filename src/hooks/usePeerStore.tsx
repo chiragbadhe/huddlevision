@@ -15,7 +15,7 @@ interface PeerState {
 const usePeerStore = create<PeerState>((set) => ({
   peerId: null,
   toLanguage: "en", // Default to English
-  fromLanguage: "en", // Default to English
+  fromLanguage: "", // Default to English
   audioStream: null,
   setPeerId: (id) => set({ peerId: id }),
   setToLanguage: (language) => set({ toLanguage: language }),

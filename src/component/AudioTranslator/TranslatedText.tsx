@@ -83,29 +83,32 @@ const TranslatedText: FC<TranslatedTextProps> = ({
         <h2 className="font-semibold text-gray-900">Translated Text</h2>
       </div>
       <div className="h-[200px] overflow-y-auto bg-gray-100 border rounded-xl p-4 space-y-2">
-        {translations.map((item, index) => (
-          <div key={index} className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-medium text-teal-500">
-                {item.peerId}
-              </span>
-              <span className="text-xs text-gray-400">{item.timestamp}</span>
+        {translations
+          .slice()
+          .reverse()
+          .map((item, index) => (
+            <div key={index} className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-medium text-teal-500">
+                  {item.peerId}
+                </span>
+                <span className="text-xs text-gray-400">{item.timestamp}</span>
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm text-gray-700">{item.originalText}</p>
+                {item.isLoading ? (
+                  <div className="flex items-center gap-2 text-gray-500">
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span className="text-sm">Translating...</span>
+                  </div>
+                ) : (
+                  <p className="text-sm text-teal-600 italic">
+                    {item.translatedText}
+                  </p>
+                )}
+              </div>
             </div>
-            <div className="space-y-1">
-              <p className="text-sm text-gray-700">{item.originalText}</p>
-              {item.isLoading ? (
-                <div className="flex items-center gap-2 text-gray-500">
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span className="text-sm">Translating...</span>
-                </div>
-              ) : (
-                <p className="text-sm text-teal-600 italic">
-                  {item.translatedText}
-                </p>
-              )}
-            </div>
-          </div>
-        ))}
+          ))}
         {translations.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-gray-500 space-y-2">
             <MonitorSpeaker className="w-8 h-8 opacity-40" />

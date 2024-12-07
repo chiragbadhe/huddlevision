@@ -9,6 +9,7 @@ type Message = {
   isBot: boolean;
   sentTimestamp: string;
   receivedTimestamp?: string;
+  loading?: boolean;
 };
 
 const ChatBot: React.FC = () => {
@@ -35,6 +36,15 @@ const ChatBot: React.FC = () => {
     setText("");
     setIsLoading(true);
 
+    // Add loading message
+    const loadingMessage = {
+      text: "",
+      isBot: true,
+      loading: true,
+      sentTimestamp: sentTimestamp,
+    };
+    setMessages((prev) => [...prev, loadingMessage]);
+
     try {
       const completion = await openai.chat.completions.create({
         messages: [{ role: "user", content: text }],
@@ -50,23 +60,31 @@ const ChatBot: React.FC = () => {
         minute: "2-digit",
       });
 
-      const botMessage = {
-        text: botResponse,
-        isBot: true,
-        sentTimestamp: receivedTimestamp,
-        receivedTimestamp,
-      };
-      setMessages((prev) => [...prev, botMessage]);
+      // Replace loading message with actual response
+      setMessages((prev) => {
+        const newMessages = [...prev];
+        newMessages[newMessages.length - 1] = {
+          text: botResponse,
+          isBot: true,
+          sentTimestamp: receivedTimestamp,
+          receivedTimestamp,
+        };
+        return newMessages;
+      });
     } catch (error) {
-      const errorMessage = {
-        text: "Sorry, there was an error processing your request.",
-        isBot: true,
-        sentTimestamp: new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      };
-      setMessages((prev) => [...prev, errorMessage]);
+      // Replace loading message with error message
+      setMessages((prev) => {
+        const newMessages = [...prev];
+        newMessages[newMessages.length - 1] = {
+          text: "Sorry, there was an error processing your request.",
+          isBot: true,
+          sentTimestamp: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        };
+        return newMessages;
+      });
     } finally {
       setIsLoading(false);
     }
@@ -107,7 +125,13 @@ const ChatBot: React.FC = () => {
                     : "bg-teal-500 text-white"
                 }`}
               >
-                {message.isBot ? (
+                {message.loading ? (
+                  <div className="flex space-x-2">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.4s" }} />
+                  </div>
+                ) : message.isBot ? (
                   <Typewriter
                     options={{
                       delay: 30,
