@@ -95,7 +95,11 @@ const JoinRoom: FC<JoinRoomProps> = ({
           <div className="flex justify-center gap-6 py-4">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-teal-500 rounded-full animate-pulse" />
-              <span className="text-sm text-gray-500">HD Video</span>
+              <span className="text-sm text-gray-500">Privacy Focused</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
+              <span className="text-sm text-gray-500">Huddle01</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
