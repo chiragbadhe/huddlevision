@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Video, Copy, ArrowRight, Loader2, CheckCircle } from "lucide-react";
+import FramerMotionWrapper from "@/component/FramerMotionWrapper";
 
 export default function Home() {
   const [roomId, setRoomId] = useState("");
@@ -65,7 +66,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen pt-[50px] bg-gradient-to-b from-gray-50 to-white text-gray-900">
+    <FramerMotionWrapper className="min-h-screen pt-[50px] bg-gradient-to-b from-gray-50 to-white text-gray-900">
       <div className="mx-4 py-6">
         <div className="text-center max-w-4xl mx-auto">
           <h1 className="text-6xl font-black bg-gradient-to-r from-teal-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-8 animate-fade-in">
@@ -190,6 +191,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </main>
+    </FramerMotionWrapper>
   );
 }

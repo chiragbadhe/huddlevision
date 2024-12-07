@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { Video, Users, ArrowRight, Loader2 } from "lucide-react";
+import FramerMotionWrapper from "../FramerMotionWrapper";
 
 interface JoinRoomProps {
   displayName: string;
@@ -23,6 +24,8 @@ const JoinRoom: FC<JoinRoomProps> = ({
   const handleJoinRoom = async () => {
     try {
       setIsJoining(true);
+      // Add artificial delay of 1.5 seconds
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       await joinRoom({
         roomId,
         token,
@@ -32,8 +35,14 @@ const JoinRoom: FC<JoinRoomProps> = ({
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" && displayName && !isJoining) {
+      handleJoinRoom();
+    }
+  };
+
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4">
+    <FramerMotionWrapper className="min-h-[80vh] flex items-center justify-center px-4">
       <div className="backdrop-blur-lg bg-white/90 rounded-2xl p-8 w-full max-w-[500px] border border-teal-500">
         <div className="text-center mb-8">
           <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -64,6 +73,7 @@ const JoinRoom: FC<JoinRoomProps> = ({
                 className="w-full px-4 py-3 bg-gray-50 text-gray-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 border border-gray-200 pl-10 transition-all duration-200"
                 value={displayName}
                 onChange={(event) => setDisplayName(event.target.value)}
+                onKeyPress={handleKeyPress}
               />
               <Video className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             </div>
@@ -119,7 +129,7 @@ const JoinRoom: FC<JoinRoomProps> = ({
           </p>
         </div>
       </div>
-    </div>
+    </FramerMotionWrapper>
   );
 };
 

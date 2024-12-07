@@ -117,8 +117,18 @@ function Home({ token }: Props) {
           />
         </div>
       ) : (
-        <div className="aspect-video rounded-xl bg-gray-100 flex items-center justify-center">
-          <span className="text-gray-500">Camera is off</span>
+        <div className="aspect-video rounded-xl bg-gray-100 flex flex-col items-center justify-center gap-4">
+          <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center">
+            <VideoOff className="w-10 h-10 text-gray-400" />
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-gray-500 font-medium">
+              Camera is turned off
+            </span>
+            <span className="text-gray-400 text-sm">
+              Click the camera button below to turn it on
+            </span>
+          </div>
         </div>
       )}
 
@@ -186,8 +196,14 @@ function Home({ token }: Props) {
           ) : null
         )
       ) : (
-        <div className="aspect-video bg-gray-100 backdrop-blur-lg rounded-xl overflow-hidden border border-teal-500 flex items-center justify-center">
-          <span className="text-gray-500">No peers joined yet</span>
+        <div className="aspect-video bg-gray-100 backdrop-blur-lg rounded-xl overflow-hidden border border-teal-500 flex flex-col items-center justify-center gap-4 p-6">
+          <Users className="w-12 h-12 text-teal-400 animate-pulse" />
+
+          <div className="flex items-center gap-2 mt-2">
+            <div className="w-2 h-2 bg-teal-500 rounded-full animate-bounce" />
+            <div className="w-2 h-2 bg-teal-500 rounded-full animate-bounce delay-100" />
+            <div className="w-2 h-2 bg-teal-500 rounded-full animate-bounce delay-200" />
+          </div>
         </div>
       )}
     </div>

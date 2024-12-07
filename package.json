@@ -14,6 +14,7 @@
     "@huddle01/server-sdk": "latest",
     "@types/react-speech-recognition": "^3.9.5",
     "cors": "^2.8.5",
+    "framer-motion": "^11.13.1",
     "lucide-react": "^0.468.0",
     "next": "14.0.3",
     "openai": "^4.76.0",

@@ -42,7 +42,17 @@ const useTranscriptionStore = create<TranscriptionStore>((set, get) => ({
     }),
   getWholeTranscript: () => {
     const state = get();
-    return state.translations.map((item) => item.originalText).join(" ");
+    return state.translations
+      .filter((item) => !item.isLoading)
+      .map((item) => item.originalText)
+      .join(" ");
+  },
+  getSingleTranscript: (peerId: string) => {
+    const state = get();
+    return state.translations
+      .filter((item) => !item.isLoading && item.peerId === peerId)
+      .map((item) => item.originalText)
+      .join(" ");
   },
 }));
 

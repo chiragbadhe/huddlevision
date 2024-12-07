@@ -85,7 +85,7 @@ const SelectLanguages: React.FC<SelectLanguagesProps> = () => {
               className="px-4 py-2 w-[300px] rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-200 hover:bg-gray-50 text-left"
             >
               {languages.find((lang) => lang.code === toLanguage)?.name ||
-                "Select Language"}
+                "हिंदी"}
             </button>
           </div>
         </div>
