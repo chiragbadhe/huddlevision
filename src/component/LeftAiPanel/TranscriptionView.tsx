@@ -1,6 +1,6 @@
 import { FC } from "react";
 import PanelWrapper from "./PanelWrapper";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, MessageCircle } from "lucide-react";
 import useTranscriptionStore from "@/hooks/useTranscriptionStore";
 
 interface TranscriptionItem {

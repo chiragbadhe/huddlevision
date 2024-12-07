@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { Inter } from "next/font/google";
@@ -31,6 +31,7 @@ import { TPeerMetadata } from "@/utils/types";
 import LoadingScreen from "@/component/StateScreens/LoadingScreen";
 import RoomTopBar from "@/component/RoomTopBar";
 import TranslatedText from "@/component/AudioTranslator/TranslatedText";
+import useTranscription from "@/hooks/useTranscription";
 
 type Props = {
   token: string;
@@ -65,6 +66,37 @@ function Home({ token }: Props) {
   const { peerIds } = usePeerIds();
   const { roomData } = useRoomMetadata<{}>({});
 
+  const { transcription, isListening, error, startListening, stopListening } =
+    useTranscription({ language: "en-US" });
+
+  console.log(transcription, isListening, error, startListening, stopListening);
+
+  const handleAudioToggle = useCallback(async () => {
+    try {
+      if (isAudioOn) {
+        await disableAudio();
+        stopListening;
+      } else {
+        await enableAudio();
+        startListening();
+      }
+    } catch (error) {
+      console.error("Failed to toggle audio:", error);
+    }
+  }, [isAudioOn, disableAudio, enableAudio]);
+
+  const handleVideoToggle = useCallback(async () => {
+    try {
+      if (isVideoOn) {
+        await disableVideo();
+      } else {
+        await enableVideo();
+      }
+    } catch (error) {
+      console.error("Failed to toggle video:", error);
+    }
+  }, [isVideoOn, disableVideo, enableVideo]);
+
   // Effects
   useEffect(() => {
     if (stream && videoRef.current) {
@@ -98,9 +130,7 @@ function Home({ token }: Props) {
               ? "bg-teal-500 hover:bg-teal-600"
               : "bg-red-500 hover:bg-red-600"
           } text-white`}
-          onClick={async () => {
-            isVideoOn ? await disableVideo() : await enableVideo();
-          }}
+          onClick={handleVideoToggle}
         >
           {isVideoOn ? (
             <Video className="w-6 h-6" />
@@ -116,9 +146,7 @@ function Home({ token }: Props) {
               ? "bg-teal-500 hover:bg-teal-600"
               : "bg-red-500 hover:bg-red-600"
           } text-white`}
-          onClick={async () => {
-            isAudioOn ? await disableAudio() : await enableAudio();
-          }}
+          onClick={handleAudioToggle}
         >
           {isAudioOn ? (
             <Mic className="w-6 h-6" />
@@ -196,7 +224,7 @@ function Home({ token }: Props) {
               <div>
                 <TranslatedText
                   peerId={dominantSpeakerId}
-                  transcriptedText={"Chirag badhe is good"}
+                  transcriptedText={transcription}
                 />
               </div>
             </div>
