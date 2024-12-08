@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Video, Copy, ArrowRight, Loader2, CheckCircle } from "lucide-react";
 import FramerMotionWrapper from "@/component/FramerMotionWrapper";
-import { Head } from "next/document";
 
 export default function Home() {
   const [roomId, setRoomId] = useState("");

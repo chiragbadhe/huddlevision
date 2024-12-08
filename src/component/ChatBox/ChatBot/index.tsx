@@ -51,6 +51,8 @@ const ChatBot: React.FC = () => {
         model: "gpt-3.5-turbo",
       });
 
+      console.log(completion)
+
       const botResponse =
         completion.choices[0]?.message?.content ||
         "Sorry, I couldn't process that.";
